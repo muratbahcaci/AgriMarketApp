@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "567989673443",
+    "project_id": "eticaretugulamam",
+    "storage_bucket": "eticaretugulamam.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567989673443:android:d0f7cf0f40628551ed14d6",
+        "android_client_info": {
+          "package_name": "com.example.mykotlinuygulamam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfjRsgkRQ8FV1k6uw-HciWf_5hvWiR1CU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

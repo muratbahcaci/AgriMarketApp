@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "7712202183",
+    "project_id": "androiguygulamam",
+    "storage_bucket": "androiguygulamam.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:7712202183:android:e5c4e0ef37c7b4c7c58de2",
+        "android_client_info": {
+          "package_name": "com.example.mykotlinuygulamam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3rOxZBOEeERHpqnuuvdv4hnVj5ObY5iQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

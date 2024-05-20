@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="editTextPassword" type="id"/>
+    <item name="emailAddressEditText" type="id"/>
+    <item name="editTextProductName" type="id"/>
+    <item name="editTextProductPrice" type="id"/>
+    <item name="editTextProductInfo" type="id"/>
+    <item name="rvProductList" type="id"/>
+    <item name="urunAdiTextView" type="id"/>
+    <item name="urunFiyatiTextView" type="id"/>
+    <item name="main" type="id"/>
+    <item name="editProductDescription" type="id"/>
+    <item name="imageViewUrunResmi" type="id"/>
+    <item name="textViewUrunAdi" type="id"/>
+    <item name="textViewUrunFiyati" type="id"/>
+    <item name="textViewUrunAciklamasi" type="id"/>
+    <item name="recyclerViewFavoriUrunler" type="id"/>
+    <item name="urunResmiImageView" type="id"/>
+    <item name="urunAciklamasiTextView" type="id"/>
+    <item name="favoriUrunlerRecyclerView" type="id"/>
+    <item name="urunResimImageView" type="id"/>
+    <item name="urunAciklamaTextView" type="id"/>
+    <item name="editTextStoreName" type="id"/>
+    <item name="editTextProductCategory" type="id"/>
+    <item name="addButton" type="id"/>
+    <item name="spinnerProductCategory" type="id"/>
+    <item name="urunFiyatTextView" type="id"/>
+    <item name="urunBilgiTextView" type="id"/>
+    <item name="urunImageView" type="id"/>
+    <item name="recyclerViewProfile" type="id"/>
+</resources>

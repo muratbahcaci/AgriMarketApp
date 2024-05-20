@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#404040"
+    tools:ignore="ExtraText">
+    tools:context=".RegisterActivity">
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="376dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="32dp"
+        android:hint="@string/isim"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="Autofill,TextContrastCheck,TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="378dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/email_hint"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameEditText"
+        tools:ignore="Autofill,TextContrastCheck,TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="378dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/password_hint"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailEditText"
+        tools:ignore="Autofill,TextContrastCheck,TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/confirmPasswordEditText"
+        android:layout_width="377dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/sifreyi_onaylayin"
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordEditText"
+        tools:ignore="Autofill,TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="403dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/kayit_ol"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/confirmPasswordEditText"
+        tools:ignore="VisualLintButtonSize" />
+
+    <Switch
+        android:id="@+id/switchShowPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/sifreyi_goruntule"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordEditText"
+        tools:ignore="NotSibling,UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">mahmut expres</string>
+    <string name="sifremi_unuttum">Şifremi Unuttum</string>
+    <string name="giris">Giriş</string>
+    <string name="password">Şifre</string>
+    <string name="emailadres">E-posta Adresi</string>
+    <string name="ho_geldiniz">Hoş Geldiniz</string>
+    <string name="email_hint">E-posta</string>
+    <string name="password_hint">Şifre</string>
+    <string name="password_confirm">Şifre Onayla</string>
+    <string name="register">Kaydol</string>
+    <string name="email_address">E-posta Adresi</string>
+    <string name="name">İsim</string>
+    <string name="show_password">Şifreyi Göster</string>
+    <string name="isim">İsim</string>
+    <string name="sifreyi_onaylayin">Şifreyi Onaylayın</string>
+    <string name="sifreyi_goruntule">Şifreyi Göster</string>
+    <string name="kayit_ol">Kayıt Ol</string>
+    <string name="r_n_ekle">Ürün Ekle</string>
+    <string name="ekle">Ekle</string>
+    <string name="anasayfa">Anasayfa</string>
+    <string name="product_image">Ürün Resmi</string>
+    <string name="profile_description">Profil açıklaması</string>
+    <string name="home_description">Ana sayfa açıklaması</string>
+    <string name="add_description">Ekle açıklaması</string>
+    <string name="cart_description">Sepet açıklaması</string>
+    <string name="favorites_description">Favoriler açıklaması</string>
+    <string name="product_name_hint">Ürün Adı</string>
+    <string name="product_price_hint">Fiyat</string>
+    <string name="product_info_hint">Ürün Bilgisi</string>
+    <string name="profile_image_description">Profil resmi</string>
+    <string name="store_name_hint">Mağaza adı</string>
+    <string name="share_date">Paylaşım Tarihi: 01/01/2024</string>
+    <string name="username_hint">Kullanıcı Adı</string>
+    <string name="account_info">Hesap Bilgileriniz</string>
+    <string name="account_creation_date">Hesap Oluşturulma Tarihi: 01/01/2021</string>
+    <string name="store_name">Mağaza Adı: MyStore</string>
+    <string name="update_info">Bilgileri Güncelle</string>
+    <string name="product_name">Ürün Adı</string>
+    <string name="product_description">Ürün Açıklaması</string>
+    <string name="back">Back</string>
+    <string name="cart">Cart</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="price_not_available">price_not_available</string>
+    <string name="fiyat_bilgisi_bulunamadi">Fiyat bilgisi bulunamadı</string>
+    <string name="favorilerden_cikar">favorilerden_cikar</string>
+    <string name="favorilere_ekle">favorilere_ekle</string>
+    <string name="price_hint">Fiyat</string>
+    <string name="kategori_turu">Kategori Türünü Yazınız</string>
+    <string name="product_price">%1$.2f TL</string>
+    <string name="add_to_cart">Sepete Ekle</string>
+    <string name="add_to_favorites">Favorilere Ekle</string>
+    <string name="urun_adi">Ürün Adı</string>
+    <string name="user_profile">User Profile</string>
+    <string name="user_email">user@example.com</string>
+    <string name="your_uploaded_products">Your Uploaded Products</string>
+    <string name="urun_fiyati">Fiyat: %1$s TL</string>
+    <string name="remove_from_favorites">Favorilerden Kaldır</string>
+    <string name="price_template">%1$s TL</string>
+    <string name="profile">Profile</string>
+    <string name="product_image_description">Product Image</string>
+    <string name="delete">Sil</string> <!-- Added string resource for delete button -->
+
+    <!-- Yeni eklenen string kaynakları ve kategori listesi -->
+    <string-array name="product_categories">
+        <item>Tekerlekler</item>
+        <item>Haplar</item>
+        <item>Fareler</item>
+        <item>Bilgisayarlar</item>
+        <item>Peçeteler</item>
+        <item>Kalemler</item>
+        <item>Defterler</item>
+        <item>Soğutucular</item>
+        <item>telefonlar</item>
+        <item>ayakkabilar</item>
+        <item>terlikler</item>
+        <item>pantolonlar</item>
+        <item>cuzdanlar</item>
+        <item>isiklar</item>
+        <item>masalar</item>
+        <item>kemer</item>
+        <item>okuma kitabi</item>
+        <item>okul ihtiyaclari</item>
+        <item>tarim ilaclari</item>
+        <item>dis bakim malzemeleri</item>
+        <item>tabletler</item>
+    </string-array>
+</resources> 
