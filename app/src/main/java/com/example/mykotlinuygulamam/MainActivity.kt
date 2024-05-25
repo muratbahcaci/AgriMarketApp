@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
-
+        supportActionBar?.hide()
         binding.signInButton.setOnClickListener {
             val email = binding.emailAddressEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()

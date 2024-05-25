@@ -30,6 +30,7 @@ class ProfileActivity : AppCompatActivity() {
         setupViews()
         fetchUserProfile()
         fetchUserProducts()
+        supportActionBar?.hide()
     }
 
     private fun setupViews() {

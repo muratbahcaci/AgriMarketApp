@@ -21,7 +21,7 @@ class ProductDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.urundetay_product)
-
+        supportActionBar?.hide()
         val imageViewProduct: ImageView = findViewById(R.id.productImage)
         val textViewProductName: TextView = findViewById(R.id.productName)
         val textViewProductPrice: TextView = findViewById(R.id.productPrice)

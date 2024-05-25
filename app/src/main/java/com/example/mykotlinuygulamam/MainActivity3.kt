@@ -11,8 +11,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -32,6 +33,7 @@ class MainActivity3 : AppCompatActivity(), CategoriesBottomSheetDialogFragment.C
     private lateinit var recyclerView: RecyclerView
     private lateinit var urunAdapter: UrunAdapter
     private lateinit var addButton: ImageButton
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private val firestoreInstance: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
     private val storageInstance: FirebaseStorage by lazy { FirebaseStorage.getInstance() }
     private val authInstance: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
@@ -53,15 +55,21 @@ class MainActivity3 : AppCompatActivity(), CategoriesBottomSheetDialogFragment.C
                 ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSION_CODE)
             }
         }
+        supportActionBar?.hide()
         fetchProductsFromFirebase()
     }
 
     private fun setupViews() {
         recyclerView = findViewById(R.id.rvProductList)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
+        recyclerView.layoutManager = GridLayoutManager(this, 2) // Her satırda iki öğe görüntüle
         val urunListesi = mutableListOf<Urun>()
         urunAdapter = UrunAdapter(this, urunListesi)
         recyclerView.adapter = urunAdapter
+
+        swipeRefreshLayout.setOnRefreshListener {
+            fetchProductsFromFirebase()
+        }
 
         val btnProfile: ImageButton = findViewById(R.id.btnProfile)
         val btnCategories: ImageButton = findViewById(R.id.btnCategories)
@@ -161,9 +169,11 @@ class MainActivity3 : AppCompatActivity(), CategoriesBottomSheetDialogFragment.C
             refStorage.downloadUrl.addOnSuccessListener { uri ->
                 val updatedProduct = urunler.copy(imageUrl = uri.toString())
                 saveProductToFirestore(updatedProduct)
+                swipeRefreshLayout.isRefreshing = false // Yenileme işlemini durdur
             }
         }.addOnFailureListener { e ->
             showError("Resim yüklenirken bir hata oluştu: ${e.message}")
+            swipeRefreshLayout.isRefreshing = false // Yenileme işlemini durdur
         }
     }
 
@@ -183,8 +193,10 @@ class MainActivity3 : AppCompatActivity(), CategoriesBottomSheetDialogFragment.C
 
         firestoreInstance.collection("Products").document(urunler.id).set(productData).addOnSuccessListener {
             showSuccess("Ürün başarıyla eklendi.")
+            swipeRefreshLayout.isRefreshing = false // Yenileme işlemini durdur
         }.addOnFailureListener { e ->
             showError("Ürün eklenirken hata oluştu: ${e.message}")
+            swipeRefreshLayout.isRefreshing = false // Yenileme işlemini durdur
         }
     }
 
@@ -197,8 +209,10 @@ class MainActivity3 : AppCompatActivity(), CategoriesBottomSheetDialogFragment.C
                 }
             }
             urunAdapter.updateUrunler(productList)
+            swipeRefreshLayout.isRefreshing = false // Yenileme işlemini durdur
         }.addOnFailureListener { exception ->
             showError("Error loading products: ${exception.message}")
+            swipeRefreshLayout.isRefreshing = false // Yenileme işlemini durdur
         }
     }
 

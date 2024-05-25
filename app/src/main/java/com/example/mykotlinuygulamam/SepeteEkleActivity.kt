@@ -20,7 +20,7 @@ class SepeteEkleActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerViewCartItems)
         buttonCompleteOrder = findViewById(R.id.buttonCompleteOrder)
-
+        supportActionBar?.hide()
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
         if (currentUserId != null) {
             fetchCartItems(currentUserId)

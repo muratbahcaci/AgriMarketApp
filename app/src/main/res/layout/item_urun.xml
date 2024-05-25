@@ -2,41 +2,42 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
         <!-- Ürün Resmi -->
-        <ImageView
-            android:id="@+id/urunResimImageView"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            tools:src="@drawable/ic_launcher_background" />
 
         <!-- Ürün Adı -->
+
+        <ImageView
+            android:id="@+id/urunResimImageView"
+            android:layout_width="136dp"
+            android:layout_height="130dp"
+            tools:src="@drawable/ic_launcher_background" />
+
         <TextView
             android:id="@+id/urunAdiTextView"
-            android:layout_width="match_parent"
+            android:layout_width="143dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Ürün Adı"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black" />
+            android:textStyle="bold" />
 
         <!-- Ürün Fiyatı -->
         <TextView
             android:id="@+id/urunFiyatiTextView"
-            android:layout_width="match_parent"
+            android:layout_width="143dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="₺0.00"
@@ -47,12 +48,12 @@
         <!-- Ürün Açıklaması -->
         <TextView
             android:id="@+id/urunAciklamasiTextView"
-            android:layout_width="match_parent"
+            android:layout_width="152dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Ürün açıklaması burada yer alacak."
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
 
 
     </LinearLayout>

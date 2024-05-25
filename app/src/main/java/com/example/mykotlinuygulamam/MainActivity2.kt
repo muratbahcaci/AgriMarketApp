@@ -16,7 +16,7 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        supportActionBar?.hide()
         auth = FirebaseAuth.getInstance()
 
         binding.switchShowPassword.setOnCheckedChangeListener { _, isChecked ->

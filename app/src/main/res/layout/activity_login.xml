@@ -1,21 +1,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#404040"> <!-- Arka plan rengini siyah yaptım -->
+    android:background="#DFD4D4"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/textViewWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ho_geldiniz"
-        android:textSize="24sp"
-        android:textColor="#FFFFFF"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp" />
-
-
+        android:layout_marginTop="48dp"
+        android:text="@string/ho_geldiniz"
+        android:textColor="@color/orange"
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/emailAddressEditText"
@@ -23,11 +22,12 @@
         android:layout_height="56dp"
         android:layout_below="@id/textViewWelcome"
         android:layout_marginTop="29dp"
-        android:backgroundTint="#FFFFFF"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@color/orange"
         android:hint="@string/emailadres"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
         android:inputType="textEmailAddress"
+        android:textColor="@color/black"
+        android:textColorHint="@color/orange"
         tools:ignore="Autofill,VisualLintTextFieldSize" />
 
     <EditText
@@ -36,12 +36,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/emailAddressEditText"
         android:layout_marginTop="16dp"
-        android:backgroundTint="#FFFFFF"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@color/orange"
         android:hint="@string/password"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
         android:inputType="textPassword"
         android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/orange"
         tools:ignore="Autofill,TouchTargetSizeCheck" />
 
     <Button
@@ -52,22 +53,20 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:background="#BB86FC"
+        android:background="@drawable/rounded_button_orange"
         android:text="@string/sifremi_unuttum"
-        android:textColor="#FFFFFF"
-        tools:ignore="TextContrastCheck" />
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/buttonRegister"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/buttonForgotPassword"
+        android:layout_alignTop="@id/buttonForgotPassword"
         android:layout_marginStart="16dp"
-        android:layout_toEndOf="@+id/buttonForgotPassword"
-        android:background="#BB86FC"
+        android:layout_toEndOf="@id/buttonForgotPassword"
+        android:background="@drawable/rounded_button_orange"
         android:text="@string/kayit_ol"
-        android:textColor="#FFFFFF"
-        tools:ignore="TextContrastCheck" />
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/signInButton"
@@ -75,9 +74,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/buttonForgotPassword"
         android:layout_marginTop="16dp"
-        android:background="#4C387A"
+        android:background="@drawable/rounded_button_orange"
         android:text="@string/giris"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         tools:ignore="VisualLintButtonSize" />
 
     <Switch
@@ -90,6 +89,4 @@
         android:layout_marginEnd="7dp"
         android:text="Şifreyi Göster"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-
 </RelativeLayout>

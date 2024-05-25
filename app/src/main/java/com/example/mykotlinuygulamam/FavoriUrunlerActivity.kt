@@ -23,7 +23,7 @@ class FavoriUrunlerActivity : AppCompatActivity() {
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
         recyclerView = findViewById(R.id.recyclerViewFavoriUrunler)
         recyclerView.layoutManager = LinearLayoutManager(this)
-
+        supportActionBar?.hide()
         adapter = FavoriUrunAdapter(favoriUrunlerListesi) { favoriUrun ->
             val userId = FirebaseAuth.getInstance().currentUser?.uid
             if (userId != null) {
