@@ -34,7 +34,7 @@
         android:contentDescription="@string/home_description"
         android:scaleType="centerCrop"
         android:src="@drawable/yenikatttttaaaaa"
-        android:tint="#973D3D"
+        android:tint="#000000"
         tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
