@@ -1,5 +1,6 @@
 package com.example.mykotlinuygulamam
 
+import CartItem
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -17,10 +18,11 @@ class SepeteEkleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sepete_ekle)
+        supportActionBar?.hide()
 
         recyclerView = findViewById(R.id.recyclerViewCartItems)
         buttonCompleteOrder = findViewById(R.id.buttonCompleteOrder)
-        supportActionBar?.hide()
+
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
         if (currentUserId != null) {
             fetchCartItems(currentUserId)
@@ -29,7 +31,6 @@ class SepeteEkleActivity : AppCompatActivity() {
         }
 
         buttonCompleteOrder.setOnClickListener {
-            // Siparişi tamamlama işlemini burada gerçekleştir
             completeOrder()
         }
     }
@@ -45,18 +46,40 @@ class SepeteEkleActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView(cartItems: List<CartItem>) {
-        val adapter = CartItemAdapter(cartItems) { cartItem ->
+        val adapter = CartItemAdapter(cartItems, { cartItem ->
             val intent = Intent(this, ProductDetailActivity::class.java).apply {
-                putExtra("productId", cartItem.productId) // 'productId' alanınızı buraya ekleyin
+                putExtra("productId", cartItem.id) // 'id' alanınızı buraya ekleyin
                 putExtra("name", cartItem.name)
                 putExtra("price", cartItem.price)
                 putExtra("description", cartItem.description)
                 putExtra("imageUrl", cartItem.imageUrl)
             }
             startActivity(intent)
-        }
+        }, { cartItem ->
+            deleteCartItem(cartItem)
+        })
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
+    }
+
+    private fun deleteCartItem(cartItem: CartItem) {
+        val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
+        if (currentUserId != null) {
+            val cartItemRef = FirebaseFirestore.getInstance()
+                .collection("UserCarts")
+                .document(currentUserId)
+                .collection("CartItems")
+                .document(cartItem.id) // Burada 'id' alanınızı kullanın
+
+            cartItemRef.delete()
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Ürün sepetten silindi", Toast.LENGTH_SHORT).show()
+                    fetchCartItems(currentUserId) // Sepeti yeniden yükle
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Ürün silinirken hata oluştu: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
+                }
+        }
     }
 
     private fun completeOrder() {

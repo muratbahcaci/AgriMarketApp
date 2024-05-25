@@ -58,8 +58,9 @@ class ProductDetailActivity : AppCompatActivity() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
         val userCartRef = firestore.collection("UserCarts").document(userId).collection("CartItems")
+        val newCartItemId = UUID.randomUUID().toString() // Yeni ID oluştur
         val cartItem = hashMapOf(
-
+            "id" to newCartItemId,
             "name" to productName,
             "price" to productPrice,
             "description" to productDescription,
@@ -67,13 +68,7 @@ class ProductDetailActivity : AppCompatActivity() {
             "quantity" to 1  // Miktar varsayılan olarak 1
         )
 
-        val documentRef = if (productId.isNullOrEmpty()) {
-            userCartRef.document()  // Yeni belge ve otomatik ID oluştur
-        } else {
-            userCartRef.document(productId)  // Belirtilen ID ile belge oluştur
-        }
-
-        documentRef.set(cartItem)
+        userCartRef.document(newCartItemId).set(cartItem) // Yeni ID ile belge oluştur
             .addOnSuccessListener {
                 Toast.makeText(this, "$productName sepete eklendi", Toast.LENGTH_SHORT).show()
                 val cartIntent = Intent(this, SepeteEkleActivity::class.java)
@@ -107,7 +102,6 @@ class ProductDetailActivity : AppCompatActivity() {
                 Toast.makeText(this, "Favorilere eklerken hata: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
             }
     }
-
 
     private fun productIdGenerator(): String {
         return UUID.randomUUID().toString()
