@@ -28,14 +28,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="20dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="11dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="#FFFFFF"
         android:contentDescription="@string/home_description"
         android:scaleType="centerCrop"
-        android:src="@drawable/yenikatttttaaaaa"
-        android:tint="#000000"
+        android:src="@drawable/png_transparent_hamburger_button_business_menu_computer_icons_horizontal_line_angle_company_text_pho"
+        app:tint="#000000"
         tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -56,7 +58,7 @@
     <LinearLayout
         android:id="@+id/llButtonGroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:backgroundTint="#FFFFFF"
@@ -71,7 +73,7 @@
             android:backgroundTint="#FFFFFF"
             android:contentDescription="@string/profile_description"
             android:outlineAmbientShadowColor="#000000"
-            android:src="@drawable/profiliss"
+            android:src="@drawable/pngtree_avatar_icon_profile_icon_member_login_vector_isolated_png_image_1978396_photoroom"
             app:tint="#000000" />
 
         <ImageButton
@@ -81,28 +83,30 @@
             android:layout_weight="1"
             android:backgroundTint="#FFFFFF"
             android:contentDescription="@string/favorites_description"
-            android:src="@drawable/begendikerlim"
+            android:src="@drawable/heart_icon_vector_illustration_linear_260nw_615248825_photoroom_png_photoroom__1_"
             app:tint="#E6004E" />
 
         <ImageButton
             android:id="@+id/btnAdd"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
+            android:layout_marginTop="-3dp"
             android:layout_weight="1"
             android:backgroundTint="#FFFFFF"
             android:contentDescription="@string/add_description"
-            android:src="@drawable/urunekleme"
+            android:src="@drawable/artibutton"
             app:tint="#3F51B5" />
 
         <ImageButton
             android:id="@+id/btnCart"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:layout_weight="1"
             android:backgroundTint="#FFFFFF"
             android:contentDescription="@string/cart_description"
-            android:src="@drawable/sepetim"
+            android:src="@drawable/pngtree_shoping_cart_line_icon_png_image_9015773__1_"
             app:tint="#000000" />
+
     </LinearLayout>
 
 </RelativeLayout>

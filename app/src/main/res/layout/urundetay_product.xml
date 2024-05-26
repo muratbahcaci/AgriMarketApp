@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/productImage"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="30dp"
         android:text="Ürün Adı"
         android:textAppearance="?attr/textAppearanceHeadline6" />
 
@@ -63,9 +63,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/productName"
+        android:layout_marginTop="40dp"
         android:text="₺179,90"
-        android:textAppearance="?attr/textAppearanceHeadline6"
-        android:layout_marginTop="8dp" />
+        android:textAppearance="?attr/textAppearanceHeadline6" />
 
     <!-- Ürün Açıklaması -->
     <TextView
@@ -73,8 +73,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/productPrice"
-        android:text="Bu kısım ürün açıklamasını içerir."
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="15dp"
+        android:text="Bu kısım ürün açıklamasını içerir." />
 
     <!-- Beğen butonu -->
 
@@ -88,24 +88,25 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="6dp"
         android:clickable="true"
+        android:contentDescription="@string/add_to_favorites"
         android:focusable="true"
-        android:src="@drawable/begeniekleem"
-        android:contentDescription="@string/add_to_favorites" />
+        android:foregroundTint="#682020"
+        android:src="@drawable/begeniekleem" />
 
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/addToCartButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="8dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="sepete ekle" />
 
@@ -114,7 +115,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="satin al " />
+            android:text="satın al " />
     </LinearLayout>
 
 </RelativeLayout>
