@@ -37,7 +37,7 @@ class ProfileActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.rvProfileProducts)
         recyclerView.layoutManager = LinearLayoutManager(this)
         val urunListesi = mutableListOf<Product>()
-        profileAdapter = ProfileAdapter(urunListesi, this::onDeleteProduct)
+        profileAdapter = ProfileAdapter(urunListesi, this::onDeleteProduct, this::onProductClick) // Tıklama olayını ekleyin
         recyclerView.adapter = profileAdapter
 
         val btnBack: ImageButton = findViewById(R.id.btnBack)
@@ -110,6 +110,16 @@ class ProfileActivity : AppCompatActivity() {
         }, { e ->
             showError("Ürün silinirken hata oluştu: ${e.message}")
         })
+    }
+
+    private fun onProductClick(product: Product) {
+        val intent = Intent(this, ProductDetailActivity::class.java)
+        intent.putExtra("PRODUCT_ID", product.id)
+        intent.putExtra("name", product.name)
+        intent.putExtra("price", product.price)
+        intent.putExtra("description", product.description)
+        intent.putExtra("imageUrl", product.imageUrl)
+        startActivity(intent)
     }
 
     private fun pickImageFromGallery() {

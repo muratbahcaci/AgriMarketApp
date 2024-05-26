@@ -1,6 +1,5 @@
 package com.example.mykotlinuygulamam
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +12,11 @@ import com.bumptech.glide.Glide
 
 class ProfileAdapter(
     private val products: MutableList<Product>,
-    private val onDeleteProduct: (Product) -> Unit
+    private val onDeleteProduct: (Product) -> Unit,
+    private val onProductClick: (Product) -> Unit // Yeni tıklama işleyici
 ) : RecyclerView.Adapter<ProfileAdapter.ProductViewHolder>() {
 
-    class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.textViewProductName)
         val descriptionTextView: TextView = itemView.findViewById(R.id.textViewProductDescription)
         val priceTextView: TextView = itemView.findViewById(R.id.textViewProductPrice)
@@ -45,6 +45,10 @@ class ProfileAdapter(
             }, { e ->
                 Toast.makeText(holder.itemView.context, "Ürün silinirken hata oluştu: ${e.message}", Toast.LENGTH_SHORT).show()
             })
+        }
+
+        holder.itemView.setOnClickListener {
+            onProductClick(product) // Tıklama olayını ilet
         }
     }
 

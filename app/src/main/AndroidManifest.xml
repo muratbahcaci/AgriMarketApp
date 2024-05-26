@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
@@ -28,14 +29,11 @@
         <activity android:name=".MainActivity3" android:exported="true" />
         <activity android:name=".ProductDetailActivity" android:exported="true"/>
         <activity android:name=".SepeteEkleActivity" android:exported="true"/>
-        <!-- Tekrar eden FavoriUrunlerActivity ve ProfileActivity sadece bir kez listelenmelidir. -->
         <activity android:name=".FavoriUrunlerActivity" android:exported="true"/>
         <activity android:name=".ProfileActivity" android:exported="true"/>
+        <activity android:name=".PaymentActivity" android:exported="true"/>
+        <activity android:name=".OrderStatusActivity" android:exported="true"/>
 
-
-
-
-        <!-- Burada diğer aktiviteler ve uygulama bileşenleriniz tanımlanacaktır. -->
 
     </application>
 </manifest>

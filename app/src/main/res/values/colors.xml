@@ -11,7 +11,7 @@
     <color name="gray">#808080</color>
     <color name="red">#FF0000</color>
     <color name="custom_color">#73A4A3</color>
-
+    <color name="buttonColor">#FF5722</color>
         <color name="orange">#FF7F00</color>
     <color name="custom_gray">#afabb4</color>
 

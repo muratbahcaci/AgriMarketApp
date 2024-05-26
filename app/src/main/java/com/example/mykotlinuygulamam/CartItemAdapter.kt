@@ -4,6 +4,7 @@ import CartItem
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,7 +14,8 @@ import com.bumptech.glide.Glide
 class CartItemAdapter(
     private val cartItems: List<CartItem>,
     private val itemClickListener: (CartItem) -> Unit,
-    private val deleteClickListener: (CartItem) -> Unit
+    private val deleteClickListener: (CartItem) -> Unit,
+    private val checkBoxClickListener: (CartItem, Boolean) -> Unit // CheckBox işleyici
 ) : RecyclerView.Adapter<CartItemAdapter.CartItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartItemViewHolder {
@@ -23,7 +25,7 @@ class CartItemAdapter(
 
     override fun onBindViewHolder(holder: CartItemViewHolder, position: Int) {
         val currentItem = cartItems[position]
-        holder.bind(currentItem, itemClickListener, deleteClickListener)
+        holder.bind(currentItem, itemClickListener, deleteClickListener, checkBoxClickListener)
     }
 
     override fun getItemCount() = cartItems.size
@@ -34,8 +36,9 @@ class CartItemAdapter(
         private val itemDescription: TextView = itemView.findViewById(R.id.textViewProductDescription)
         private val itemImage: ImageView = itemView.findViewById(R.id.imageViewProductImage)
         private val deleteButton: ImageButton = itemView.findViewById(R.id.buttonDeleteProduct)
+        private val checkBox: CheckBox = itemView.findViewById(R.id.checkBoxSelectProduct)
 
-        fun bind(cartItem: CartItem, itemClickListener: (CartItem) -> Unit, deleteClickListener: (CartItem) -> Unit) {
+        fun bind(cartItem: CartItem, itemClickListener: (CartItem) -> Unit, deleteClickListener: (CartItem) -> Unit, checkBoxClickListener: (CartItem, Boolean) -> Unit) {
             itemName.text = cartItem.name
             itemPrice.text = cartItem.price.toString()
             itemDescription.text = cartItem.description
@@ -43,6 +46,9 @@ class CartItemAdapter(
 
             itemView.setOnClickListener { itemClickListener(cartItem) }
             deleteButton.setOnClickListener { deleteClickListener(cartItem) }
+            checkBox.setOnCheckedChangeListener { _, isChecked ->
+                checkBoxClickListener(cartItem, isChecked)
+            }
         }
     }
 }

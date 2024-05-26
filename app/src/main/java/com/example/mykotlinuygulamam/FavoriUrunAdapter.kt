@@ -11,7 +11,8 @@ import com.bumptech.glide.Glide
 
 class FavoriUrunAdapter(
     private val favoriUrunlerListesi: MutableList<FavoriUrun>,
-    private val onItemDeleted: (FavoriUrun) -> Unit
+    private val onItemDeleted: (FavoriUrun) -> Unit,
+    private val onItemClick: (FavoriUrun) -> Unit // Yeni tıklama işleyici
 ) : RecyclerView.Adapter<FavoriUrunAdapter.FavoriUrunViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriUrunViewHolder {
@@ -27,6 +28,9 @@ class FavoriUrunAdapter(
             favoriUrunlerListesi.removeAt(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, itemCount)
+        }
+        holder.itemView.setOnClickListener {
+            onItemClick(item) // Tıklama olayını ilet
         }
     }
 

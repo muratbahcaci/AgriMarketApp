@@ -14,6 +14,7 @@ class SepeteEkleActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var buttonCompleteOrder: Button
+    private val selectedItems = mutableListOf<CartItem>() // Seçilen ürünler listesi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +58,12 @@ class SepeteEkleActivity : AppCompatActivity() {
             startActivity(intent)
         }, { cartItem ->
             deleteCartItem(cartItem)
+        }, { cartItem, isChecked ->
+            if (isChecked) {
+                selectedItems.add(cartItem)
+            } else {
+                selectedItems.remove(cartItem)
+            }
         })
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
@@ -83,7 +90,11 @@ class SepeteEkleActivity : AppCompatActivity() {
     }
 
     private fun completeOrder() {
-        Toast.makeText(this, "Siparişiniz alındı", Toast.LENGTH_SHORT).show()
-        // Burada gerçek sipariş tamamlama işlemlerini gerçekleştirin.
+        if (selectedItems.isEmpty()) {
+            Toast.makeText(this, "Sipariş için ürün seçmelisiniz.", Toast.LENGTH_SHORT).show()
+        } else {
+            val intent = Intent(this, PaymentActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

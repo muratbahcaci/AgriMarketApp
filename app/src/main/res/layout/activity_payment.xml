@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextCardNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Kart Numarası"
+        android:inputType="number"
+        android:maxLength="16"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editTextCardExpiry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Son Kullanma Tarihi (MM/YY)"
+        android:inputType="text"
+        android:maxLength="5"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editTextCardCVC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CVC"
+        android:inputType="number"
+        android:maxLength="3"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editTextCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Şehir"
+        android:inputType="text"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editTextDistrict"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="İlçe"
+        android:inputType="text"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editTextNeighborhood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mahalle/Köy"
+        android:inputType="text"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editTextBuildingNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Daire/Mülk Numarası"
+        android:inputType="text"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/buttonPay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/buttonColor"
+        android:text="Öde"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+</LinearLayout>

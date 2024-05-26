@@ -59,8 +59,14 @@
     <string name="price_template">%1$s TL</string>
     <string name="profile">Profile</string>
     <string name="product_image_description">Product Image</string>
-    <string name="delete">Sil</string> <!-- Added string resource for delete button -->
-
+    <string name="button_complete_order">Siparişi Tamamla</string>
+    <string name="card_number">Kart Numarası</string>
+    <string name="card_expiry">Son Kullanma Tarihi (MM/YY)</string>
+    <string name="card_cvc">CVC</string>
+    <string name="billing_address">Fatura Adresi</string>
+    <string name="pay">Öde</string>
+    <string name="delete">Sil</string>
+    <string name="select_product">Ürünü Seç</string>
     <!-- Yeni eklenen string kaynakları ve kategori listesi -->
     <string-array name="product_categories">
         <item>Tekerlekler</item>

@@ -1,5 +1,6 @@
 package com.example.mykotlinuygulamam
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +25,7 @@ class FavoriUrunlerActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerViewFavoriUrunler)
         recyclerView.layoutManager = LinearLayoutManager(this)
         supportActionBar?.hide()
-        adapter = FavoriUrunAdapter(favoriUrunlerListesi) { favoriUrun ->
+        adapter = FavoriUrunAdapter(favoriUrunlerListesi, { favoriUrun ->
             val userId = FirebaseAuth.getInstance().currentUser?.uid
             if (userId != null) {
                 FirebaseFirestore.getInstance()
@@ -41,7 +42,15 @@ class FavoriUrunlerActivity : AppCompatActivity() {
                         Toast.makeText(this, "Silme işlemi başarısız: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
             }
-        }
+        }, { favoriUrun ->
+            val intent = Intent(this, ProductDetailActivity::class.java)
+            intent.putExtra("PRODUCT_ID", favoriUrun.id)
+            intent.putExtra("name", favoriUrun.name)
+            intent.putExtra("price", favoriUrun.price)
+            intent.putExtra("description", favoriUrun.description)
+            intent.putExtra("imageUrl", favoriUrun.imageUrl)
+            startActivity(intent)
+        })
 
         recyclerView.adapter = adapter
 
