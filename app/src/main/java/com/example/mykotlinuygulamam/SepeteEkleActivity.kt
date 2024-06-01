@@ -1,6 +1,6 @@
 package com.example.mykotlinuygulamam
 
-import CartItem
+import com.example.mykotlinuygulamam.model.CartItem // CartItem doğru şekilde import edilmelidir.
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -49,7 +49,7 @@ class SepeteEkleActivity : AppCompatActivity() {
     private fun setupRecyclerView(cartItems: List<CartItem>) {
         val adapter = CartItemAdapter(cartItems, { cartItem ->
             val intent = Intent(this, ProductDetailActivity::class.java).apply {
-                putExtra("productId", cartItem.id) // 'id' alanınızı buraya ekleyin
+                putExtra("productId", cartItem.id)
                 putExtra("name", cartItem.name)
                 putExtra("price", cartItem.price)
                 putExtra("description", cartItem.description)
@@ -76,12 +76,12 @@ class SepeteEkleActivity : AppCompatActivity() {
                 .collection("UserCarts")
                 .document(currentUserId)
                 .collection("CartItems")
-                .document(cartItem.id) // Burada 'id' alanınızı kullanın
+                .document(cartItem.id)
 
             cartItemRef.delete()
                 .addOnSuccessListener {
                     Toast.makeText(this, "Ürün sepetten silindi", Toast.LENGTH_SHORT).show()
-                    fetchCartItems(currentUserId) // Sepeti yeniden yükle
+                    fetchCartItems(currentUserId)
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(this, "Ürün silinirken hata oluştu: ${e.localizedMessage}", Toast.LENGTH_LONG).show()

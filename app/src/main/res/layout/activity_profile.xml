@@ -1,53 +1,146 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_margin="16dp"
-        android:contentDescription="@string/back"
-        android:src="@drawable/geritusuyeni" />
-
-    <TextView
-        android:id="@+id/tvProfileTitle"
-        android:layout_width="291dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="28dp"
-        android:layout_toEndOf="@id/btnBack"
-        android:text="Profiliniz"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/ivProfileImage"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="182dp"
-        android:layout_below="@id/btnBack"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/profile_image_description"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvStoreName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ivProfileImage"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="4dp"
-        android:text="@string/store_name"
-        android:textSize="18sp" />
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_margin="16dp"
+            android:contentDescription="@string/back"
+            android:src="@drawable/geritusuyeni" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProfileProducts"
-        android:layout_width="match_parent"
-        android:layout_height="447dp"
-        android:layout_below="@id/tvStoreName"
-        android:layout_marginTop="-1dp" />
+        <TextView
+            android:id="@+id/tvProfileTitle"
+            android:layout_width="291dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="28dp"
+            android:layout_toEndOf="@id/btnBack"
+            android:text="Profiliniz"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/ivProfileImage"
+            android:layout_width="match_parent"
+            android:layout_height="182dp"
+            android:layout_below="@id/btnBack"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/profile_image_description"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/tvStoreName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivProfileImage"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
+            android:text="@string/store_name"
+            android:textSize="18sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProfileProducts"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@id/tvStoreName"
+            android:layout_above="@id/btnLogout"
+            android:layout_marginTop="-1dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="47dp"
+            android:layout_height="34dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:drawableStart="@drawable/setting"
+            android:text="Çıkış Yap" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@android:color/white"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvAccountSettingsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hesap Ayarlarınız"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:padding="16dp" />
+
+        <TextView
+            android:id="@+id/tvLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Çıkış Yap"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:layout_below="@id/tvAccountSettingsTitle"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/tvSwitchAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hesap Değiştir"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:layout_below="@id/tvLogout"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/tvChangePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Şifreyi Değiştir"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:layout_below="@id/tvSwitchAccount"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/tvOrders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sipariş Ettikleriniz"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:layout_below="@id/tvChangePassword"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
