@@ -1,6 +1,6 @@
 package com.example.mykotlinuygulamam
 
-import CartItem
+import com.example.mykotlinuygulamam.model.CartItem
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button

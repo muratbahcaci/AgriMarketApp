@@ -33,11 +33,10 @@
         android:hint="@string/store_name_hint"
         android:inputType="text" />
 
-    <EditText
-        android:id="@+id/editTextProductCategory"
+    <Spinner
+        android:id="@+id/spinnerProductCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/kategori_turu"
-        android:inputType="text" />
+        android:entries="@array/product_categories" />
 
 </LinearLayout>

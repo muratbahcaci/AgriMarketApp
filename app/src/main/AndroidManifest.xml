@@ -33,7 +33,7 @@
         <activity android:name=".ProfileActivity" android:exported="true"/>
         <activity android:name=".PaymentActivity" android:exported="true"/>
         <activity android:name=".OrderStatusActivity" android:exported="true"/>
-
+        <activity android:name=".SifreOnayActivity" android:exported="true"/> <!-- Yeni aktivite eklendi -->
 
     </application>
 </manifest>

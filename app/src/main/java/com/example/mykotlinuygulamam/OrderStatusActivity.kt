@@ -1,38 +1,49 @@
 package com.example.mykotlinuygulamam
 
 import android.os.Bundle
-import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.mykotlinuygulamam.model.Order
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class OrderStatusActivity : AppCompatActivity() {
 
-    private lateinit var textViewOrderStatus: TextView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var orderAdapter: OrderAdapter
+    private val firestoreInstance: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
+    private val authInstance: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_status)
 
-        textViewOrderStatus = findViewById(R.id.textViewOrderStatus)
-        fetchOrderStatus()
+        recyclerView = findViewById(R.id.rvOrderList)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        orderAdapter = OrderAdapter(mutableListOf())
+        recyclerView.adapter = orderAdapter
+
+        fetchOrders()
     }
 
-    private fun fetchOrderStatus() {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        FirebaseFirestore.getInstance().collection("Orders")
+    private fun fetchOrders() {
+        val userId = authInstance.currentUser?.uid ?: return
+        firestoreInstance.collection("Orders")
             .whereEqualTo("userId", userId)
             .get()
             .addOnSuccessListener { documents ->
-                if (!documents.isEmpty) {
-                    val order = documents.first().toObject(Order::class.java)
-                    textViewOrderStatus.text = "Siparişiniz başarıyla alındı. Toplam Tutar: ₺${order.totalPrice}"
-                } else {
-                    textViewOrderStatus.text = "Herhangi bir sipariş bulunamadı."
+                val orderList = mutableListOf<Order>()
+                for (document in documents) {
+                    document.toObject(Order::class.java)?.let { order ->
+                        orderList.add(order)
+                    }
                 }
+                orderAdapter.updateOrders(orderList)
             }
             .addOnFailureListener { e ->
-                textViewOrderStatus.text = "Sipariş durumu alınamadı: ${e.message}"
+                Toast.makeText(this, "Siparişler yüklenirken hata oluştu: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }
