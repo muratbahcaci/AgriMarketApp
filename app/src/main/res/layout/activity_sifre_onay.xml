@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etCurrentPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mevcut Şifre"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/etNewPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Yeni Şifre"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:layout_below="@id/etCurrentPassword"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/etConfirmNewPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Yeni Şifre (Tekrar)"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:layout_below="@id/etNewPassword"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnChangePassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Şifreyi Değiştir"
+        android:layout_below="@id/etConfirmNewPassword"
+        android:padding="16dp" />
+</RelativeLayout>

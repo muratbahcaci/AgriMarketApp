@@ -1,5 +1,7 @@
 package com.example.mykotlinuygulamam
 
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -7,9 +9,12 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.core.view.GravityCompat
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,6 +23,7 @@ import com.google.firebase.storage.FirebaseStorage
 class ProfileActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var profileAdapter: ProfileAdapter
+    private lateinit var drawerLayout: DrawerLayout
     private val firestoreInstance: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
     private val authInstance: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private val storageInstance: FirebaseStorage by lazy { FirebaseStorage.getInstance() }
@@ -37,12 +43,14 @@ class ProfileActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.rvProfileProducts)
         recyclerView.layoutManager = LinearLayoutManager(this)
         val urunListesi = mutableListOf<Product>()
-        profileAdapter = ProfileAdapter(urunListesi, this::onDeleteProduct, this::onProductClick) // Tıklama olayını ekleyin
+        profileAdapter = ProfileAdapter(urunListesi, this::onDeleteProduct, this::onProductClick)
         recyclerView.adapter = profileAdapter
 
         val btnBack: ImageButton = findViewById(R.id.btnBack)
         val ivProfileImage: ImageView = findViewById(R.id.ivProfileImage)
         val tvStoreName: TextView = findViewById(R.id.tvStoreName)
+        val btnLogout: ImageButton = findViewById(R.id.btnLogout) // Button yerine ImageButton kullanılıyor
+        drawerLayout = findViewById(R.id.drawer_layout)
 
         btnBack.setOnClickListener {
             finish()
@@ -50,6 +58,32 @@ class ProfileActivity : AppCompatActivity() {
 
         ivProfileImage.setOnClickListener {
             pickImageFromGallery()
+        }
+
+        btnLogout.setOnClickListener {
+            if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+                drawerLayout.closeDrawer(GravityCompat.END)
+            } else {
+                drawerLayout.openDrawer(GravityCompat.END)
+            }
+        }
+
+        findViewById<TextView>(R.id.tvLogout).setOnClickListener {
+            showLogoutConfirmationDialog()
+        }
+
+        findViewById<TextView>(R.id.tvSwitchAccount).setOnClickListener {
+            showLogoutConfirmationDialog()
+        }
+
+        findViewById<TextView>(R.id.tvChangePassword).setOnClickListener {
+            val intent = Intent(this, SifreOnayActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<TextView>(R.id.tvOrders).setOnClickListener {
+            val intent = Intent(this, OrderStatusActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -78,7 +112,7 @@ class ProfileActivity : AppCompatActivity() {
                 }
             }
         }.addOnFailureListener { exception ->
-            showError("Error loading profile: ${exception.message}")
+            showError("Profil yüklenirken hata oluştu: ${exception.message}")
         }
     }
 
@@ -98,7 +132,7 @@ class ProfileActivity : AppCompatActivity() {
                     profileAdapter.updateData(productList)
                 }
                 .addOnFailureListener { exception ->
-                    showError("Error loading products: ${exception.message}")
+                    showError("Ürünler yüklenirken hata oluştu: ${exception.message}")
                 }
         }
     }
@@ -106,7 +140,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun onDeleteProduct(product: Product) {
         ProductUtils.deleteProduct(product.id, {
             showSuccess("Ürün başarıyla silindi.")
-            fetchUserProducts() // Update the product list after deletion
+            fetchUserProducts() // Ürün silindikten sonra ürün listesini güncelle
         }, { e ->
             showError("Ürün silinirken hata oluştu: ${e.message}")
         })
@@ -158,6 +192,34 @@ class ProfileActivity : AppCompatActivity() {
         }.addOnFailureListener { e ->
             showError("Profil fotoğrafı yüklenirken hata oluştu: ${e.message}")
         }
+    }
+
+    private fun logoutUser() {
+        // Firebase'den çıkış yap
+        authInstance.signOut()
+
+        // SharedPreferences'dan kullanıcı bilgilerini temizle
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            clear()
+            apply()
+        }
+
+        // MainActivity'ye yönlendir
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun showLogoutConfirmationDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Çıkış Yap")
+            .setMessage("Çıkış yapmak istediğinize emin misiniz?")
+            .setPositiveButton("Evet") { dialog, which ->
+                logoutUser()
+            }
+            .setNegativeButton("Hayır", null)
+            .show()
     }
 
     private fun showSuccess(message: String) {

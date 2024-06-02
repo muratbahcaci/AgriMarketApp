@@ -1,5 +1,6 @@
 package com.example.mykotlinuygulamam
 
+import UrunAdapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -7,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +16,7 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.appcompat.widget.SearchView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -34,13 +37,13 @@ class MainActivity3 : AppCompatActivity(), CategoriesBottomSheetDialogFragment.C
     private lateinit var urunAdapter: UrunAdapter
     private lateinit var addButton: ImageButton
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var searchView: SearchView
     private val firestoreInstance: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
     private val storageInstance: FirebaseStorage by lazy { FirebaseStorage.getInstance() }
     private val authInstance: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
-    private val IMAGE_PICK_CODE = 1001
-    private val PERMISSION_CODE = 1002
+    private val imagePickCode = 1001
+    private val permissionCode = 1002
     private lateinit var dbHelper: DBHelper
-    val categories = arrayOf("Tekerlekler", "Haplar", "Fareler", "Bilgisayarlar", "Peçeteler", "Kalemler", "Defterler", "Soğutucular", "Kemer", "Cüzdanlar", "Okul İhtiyaçları", "Masalar", "Ağız Bakım Ürünleri", "Telefonlar", "Okuma Kitapları", "Tarım İhtiyaçları", "Tabletler", "Fare Bezi", "Hayvan İlaçları", "Parfümler", "Battaniyeler", "Seccadeler", "Araç Süsleri", "Işıklar", "Kablolar", "Kulaklıklar", "Klimalar", "Televizyonlar")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +55,7 @@ class MainActivity3 : AppCompatActivity(), CategoriesBottomSheetDialogFragment.C
             if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 pickImageFromGallery()
             } else {
-                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSION_CODE)
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), permissionCode)
             }
         }
         supportActionBar?.hide()
@@ -62,6 +65,7 @@ class MainActivity3 : AppCompatActivity(), CategoriesBottomSheetDialogFragment.C
     private fun setupViews() {
         recyclerView = findViewById(R.id.rvProductList)
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
+        searchView = findViewById(R.id.searchView)
         recyclerView.layoutManager = GridLayoutManager(this, 2) // Her satırda iki öğe görüntüle
         val urunListesi = mutableListOf<Urun>()
         urunAdapter = UrunAdapter(this, urunListesi)
@@ -70,6 +74,18 @@ class MainActivity3 : AppCompatActivity(), CategoriesBottomSheetDialogFragment.C
         swipeRefreshLayout.setOnRefreshListener {
             fetchProductsFromFirebase()
         }
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                urunAdapter.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                urunAdapter.filter.filter(newText)
+                return false
+            }
+        })
 
         val btnProfile: ImageButton = findViewById(R.id.btnProfile)
         val btnCategories: ImageButton = findViewById(R.id.btnCategories)
@@ -103,7 +119,7 @@ class MainActivity3 : AppCompatActivity(), CategoriesBottomSheetDialogFragment.C
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSION_CODE && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == permissionCode && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             pickImageFromGallery()
         } else {
             Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
@@ -113,12 +129,12 @@ class MainActivity3 : AppCompatActivity(), CategoriesBottomSheetDialogFragment.C
     private fun pickImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
-        startActivityForResult(intent, IMAGE_PICK_CODE)
+        startActivityForResult(intent, imagePickCode)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == IMAGE_PICK_CODE && resultCode == RESULT_OK && data != null) {
+        if (requestCode == imagePickCode && resultCode == RESULT_OK && data != null) {
             val imageUri = data.data
             if (imageUri != null) {
                 showAddProductDialog(imageUri)
@@ -133,7 +149,7 @@ class MainActivity3 : AppCompatActivity(), CategoriesBottomSheetDialogFragment.C
         val priceEditText: EditText = view.findViewById(R.id.editTextProductPrice)
         val infoEditText: EditText = view.findViewById(R.id.editTextProductInfo)
         val storeNameEditText: EditText = view.findViewById(R.id.editTextStoreName)
-        val categoryEditText: EditText = view.findViewById(R.id.editTextProductCategory)
+        val categorySpinner: Spinner = view.findViewById(R.id.spinnerProductCategory)
 
         AlertDialog.Builder(this)
             .setView(view)
@@ -142,7 +158,7 @@ class MainActivity3 : AppCompatActivity(), CategoriesBottomSheetDialogFragment.C
                 val price = priceEditText.text.toString().toDoubleOrNull() ?: 0.0
                 val info = infoEditText.text.toString().trim()
                 val storeName = storeNameEditText.text.toString().trim()
-                val category = categoryEditText.text.toString().trim()
+                val category = categorySpinner.selectedItem.toString().trim()
 
                 if (name.isEmpty() || price == 0.0 || storeName.isEmpty() || category.isEmpty()) {
                     Toast.makeText(this, "Ürün adı, fiyatı, mağaza adı ve kategori boş bırakılamaz.", Toast.LENGTH_SHORT).show()
@@ -225,6 +241,6 @@ class MainActivity3 : AppCompatActivity(), CategoriesBottomSheetDialogFragment.C
     }
 
     private fun requestStoragePermission() {
-        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSION_CODE)
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), permissionCode)
     }
 }

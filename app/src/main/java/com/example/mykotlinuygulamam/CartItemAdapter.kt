@@ -1,6 +1,5 @@
 package com.example.mykotlinuygulamam
 
-import CartItem
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.mykotlinuygulamam.model.CartItem
 
 class CartItemAdapter(
     private val cartItems: List<CartItem>,
