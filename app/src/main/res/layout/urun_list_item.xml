@@ -1,47 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
-    <ImageView
-        android:id="@+id/imageViewUrunResmi"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
-
-    <TextView
-        android:id="@+id/textViewUrunAdi"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Ürün Adı"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintStart_toEndOf="@id/imageViewUrunResmi"
-        app:layout_constraintTop_toTopOf="@id/imageViewUrunResmi"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textViewUrunFiyati"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Ürün Fiyatı"
-        app:layout_constraintStart_toStartOf="@id/textViewUrunAdi"
-        app:layout_constraintTop_toBottomOf="@id/textViewUrunAdi" />
+        <!-- Ürün Resmi -->
 
-    <TextView
-        android:id="@+id/textViewUrunAciklamasi"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Ürün Açıklaması"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="@id/textViewUrunFiyati"
-        app:layout_constraintTop_toBottomOf="@id/textViewUrunFiyati"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/imageViewUrunResmi" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Ürün Adı -->
+
+        <ImageView
+            android:id="@+id/urunResimImageView"
+            android:layout_width="136dp"
+            android:layout_height="130dp"
+            tools:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/urunAdiTextView"
+            android:layout_width="143dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Ürün Adı"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Ürün Fiyatı -->
+        <TextView
+            android:id="@+id/urunFiyatiTextView"
+            android:layout_width="143dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="₺0.00"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Ürün Açıklaması -->
+        <TextView
+            android:id="@+id/urunAciklamasiTextView"
+            android:layout_width="152dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Ürün açıklaması burada yer alacak."
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
