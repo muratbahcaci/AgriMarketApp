@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.core.view.GravityCompat
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -49,8 +51,10 @@ class ProfileActivity : AppCompatActivity() {
 
         val btnBack: ImageButton = findViewById(R.id.btnBack)
         val ivProfileImage: ImageView = findViewById(R.id.ivProfileImage)
-        val tvStoreName: TextView = findViewById(R.id.tvStoreName)
-        val btnLogout: Button = findViewById(R.id.btnLogout)
+        val etFullName: EditText = findViewById(R.id.etFullName)
+        val etEmail: EditText = findViewById(R.id.etEmail)
+        val etPhoneNumber: EditText = findViewById(R.id.etPhoneNumber)
+        val btnLogout: ImageButton = findViewById(R.id.btnLogout)
         drawerLayout = findViewById(R.id.drawer_layout)
 
         btnBack.setOnClickListener {
@@ -86,6 +90,12 @@ class ProfileActivity : AppCompatActivity() {
             val intent = Intent(this, OrderStatusActivity::class.java)
             startActivity(intent)
         }
+
+        // Kullanıcının e-posta adresini doldur
+        val currentUser = authInstance.currentUser
+        if (currentUser != null) {
+            etEmail.setText(currentUser.email)
+        }
     }
 
     private fun fetchUserProfile() {
@@ -97,20 +107,17 @@ class ProfileActivity : AppCompatActivity() {
                 val storeName = document.getString("storeName")
                 val profileImageUrl = document.getString("profileImageUrl")
 
-                val tvStoreName: TextView = findViewById(R.id.tvStoreName)
                 val ivProfileImage: ImageView = findViewById(R.id.ivProfileImage)
-
-                tvStoreName.text = storeName
-                Glide.with(this).load(profileImageUrl).into(ivProfileImage)
+                Glide.with(this)
+                    .load(profileImageUrl)
+                    .apply(RequestOptions.circleCropTransform()) // Resmi yuvarlak yapmak için
+                    .into(ivProfileImage)
             } else {
                 val newUser = mapOf(
                     "storeName" to "Yeni Mağaza",
                     "profileImageUrl" to ""
                 )
-                userDocRef.set(newUser).addOnSuccessListener {
-                    val tvStoreName: TextView = findViewById(R.id.tvStoreName)
-                    tvStoreName.text = "Yeni Mağaza"
-                }
+                userDocRef.set(newUser)
             }
         }.addOnFailureListener { exception ->
             showError("Profil yüklenirken hata oluştu: ${exception.message}")
@@ -183,7 +190,10 @@ class ProfileActivity : AppCompatActivity() {
                 userDocRef.update("profileImageUrl", profileImageUrl)
                     .addOnSuccessListener {
                         val ivProfileImage: ImageView = findViewById(R.id.ivProfileImage)
-                        Glide.with(this).load(profileImageUrl).into(ivProfileImage)
+                        Glide.with(this)
+                            .load(profileImageUrl)
+                            .apply(RequestOptions.circleCropTransform()) // Resmi yuvarlak yapmak için
+                            .into(ivProfileImage)
                         showSuccess("Profil fotoğrafı başarıyla güncellendi.")
                     }
                     .addOnFailureListener { e ->
