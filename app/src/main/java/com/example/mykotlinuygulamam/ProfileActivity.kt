@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.core.view.GravityCompat
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -51,7 +50,7 @@ class ProfileActivity : AppCompatActivity() {
         val btnBack: ImageButton = findViewById(R.id.btnBack)
         val ivProfileImage: ImageView = findViewById(R.id.ivProfileImage)
         val tvStoreName: TextView = findViewById(R.id.tvStoreName)
-        val btnLogout: ImageButton = findViewById(R.id.btnLogout)
+        val btnLogout: Button = findViewById(R.id.btnLogout)
         drawerLayout = findViewById(R.id.drawer_layout)
 
         btnBack.setOnClickListener {
@@ -102,10 +101,7 @@ class ProfileActivity : AppCompatActivity() {
                 val ivProfileImage: ImageView = findViewById(R.id.ivProfileImage)
 
                 tvStoreName.text = storeName
-                Glide.with(this)
-                    .load(profileImageUrl)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(ivProfileImage)
+                Glide.with(this).load(profileImageUrl).into(ivProfileImage)
             } else {
                 val newUser = mapOf(
                     "storeName" to "Yeni Mağaza",
@@ -187,10 +183,7 @@ class ProfileActivity : AppCompatActivity() {
                 userDocRef.update("profileImageUrl", profileImageUrl)
                     .addOnSuccessListener {
                         val ivProfileImage: ImageView = findViewById(R.id.ivProfileImage)
-                        Glide.with(this)
-                            .load(profileImageUrl)
-                            .apply(RequestOptions.circleCropTransform())
-                            .into(ivProfileImage)
+                        Glide.with(this).load(profileImageUrl).into(ivProfileImage)
                         showSuccess("Profil fotoğrafı başarıyla güncellendi.")
                     }
                     .addOnFailureListener { e ->

@@ -3,9 +3,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<<<<<<<<< Temporary merge branch 1
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+=========
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="#FAFAFA"
+        android:contentDescription="@string/back"
+        android:src="@drawable/geritusuyeni" />
+
+    <TextView
+        android:id="@+id/tvProfileTitle"
+        android:layout_width="291dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="28dp"
+        android:layout_toEndOf="@id/btnBack"
+        android:text="Profiliniz"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/ivProfileImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/btnBack"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_search_view"
+        android:contentDescription="@string/profile_image_description"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background" />
+>>>>>>>>> Temporary merge branch 2
 
         <ImageButton
             android:id="@+id/btnBack"
@@ -13,19 +48,35 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_margin="16dp"
-            android:backgroundTint="#FFFFFF"
             android:contentDescription="@string/back"
             android:src="@drawable/geritusuyeni" />
 
+<<<<<<<<< Temporary merge branch 1
+        <TextView
+            android:id="@+id/tvProfileTitle"
+            android:layout_width="291dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="28dp"
+            android:layout_toEndOf="@id/btnBack"
+            android:text="Profiliniz"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+=========
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProfileProducts"
+        android:layout_width="match_parent"
+        android:layout_height="447dp"
+        android:layout_below="@id/tvStoreName"
+        android:layout_marginTop="50dp" />
+>>>>>>>>> Temporary merge branch 2
+
         <ImageView
             android:id="@+id/ivProfileImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="182dp"
             android:layout_below="@id/btnBack"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="8dp"
-            android:layout_alignParentStart="true"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/profile_image_description"
             android:scaleType="centerCrop"
@@ -50,17 +101,19 @@
             android:layout_marginTop="-1dp"
             android:layout_weight="1" />
 
-        <ImageButton
+        <Button
             android:id="@+id/btnLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="47dp"
+            android:layout_height="34dp"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="#FFFFFF"
-            android:contentDescription="@string/logout"
-            android:src="@drawable/png_transparent_hamburger_button_business_menu_computer_icons_horizontal_line_angle_company_text_pho" />
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:drawableStart="@drawable/setting"
+            android:text="Çıkış Yap" />
     </RelativeLayout>
 
     <RelativeLayout
